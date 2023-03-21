@@ -107,34 +107,85 @@ while (ingreso == "SI"){
             }
             const SEGURO=totalConImp(total)
             console.log(SEGURO)
+
+            console.log("El valor total del seguro para su " + autos.marca + " " + autos.modelo +" es de "+ SEGURO)
+            
+            document.write(autos)
+            
+            alert("Ingrese el auto que desea ver")
+    
+    
+            let marca = prompt("Marca")
+            let modelo = prompt("Modelo")
+            let año = prompt("Año")
+    
+            const datosBusqueda= {
+                marca: marca,
+                modelo: modelo,
+                año: año,
+            }
+    
+            filtrarAuto(datosBusqueda)
+    
+    
+            
+    
+    
+    
+            document.write("El seguro para su auto  " + datosBusqueda.marca +" "+ datosBusqueda.modelo + " es de " + SEGURO + "<br>")
+
+            function mostrarAutos(lista){
+                lista.forEach(auto => {
+                    console.log(auto)
+                    return auto
+                    
+                });
+            }
+            
+            function filtrarPrecio(auto){
+                if (datosBusqueda.precio){
+                    return auto.precio === datosBusqueda.precio
+                }
+                return auto;
+            }
+            
+            function filtrarMarca(auto){
+                if(datosBusqueda.marca){
+                    return auto.marca === datosBusqueda.marca
+                }
+                return auto;
+            }
+            
+            function filtrarModelo(auto){
+                if(datosBusqueda.modelo){
+                    return auto.modelo === datosBusqueda.modelo
+                }
+                return auto;
+            }
+            
+            function filtrarAño(auto){
+                if(datosBusqueda.año){
+                    return auto.año === datosBusqueda.año
+                }
+                return auto;
+            }
+            
+            
+            function filtrarAuto(){
+                let resultado = lista.filter(filtrarMarca).filter(filtrarModelo).filter(filtrarAño);
+                if(resultado.length) {
+                    mostrarAutos(resultado)
+                }
+            } 
+        
+            function totalConImp(total){
+                return total*1.21
+            }
             
         }while(lista.length =! n)
         
         
 
-        document.write(autos)
-        
-        alert("Ingrese el auto que desea ver")
-
-
-        let marca = prompt("Marca")
-        let modelo = prompt("Modelo")
-        let año = prompt("Año")
-
-        const datosBusqueda= {
-            marca: marca,
-            modelo: modelo,
-            año: año,
-        }
-
-    filtrarAuto()
-
-
-    console.log("El valor total del seguro para su " + datosBusqueda.marca + " " + datosBusqueda.modelo +" es de "+ SEGURO)
-
-
-
-        document.write("El seguro para su auto  " + datosBusqueda.marca +" "+ datosBusqueda.modelo + " es de " + SEGURO + "<br>")
 
         ingreso=prompt("Quiere volver a cotizar su seguro o cotizar algun auto mas? SI o NO?")
 
@@ -143,7 +194,9 @@ while (ingreso == "SI"){
             console.log("-------")
             totalSeguro = 0 ;
         }
-    }     
+    }
+
+    
 }
 
 
@@ -151,50 +204,4 @@ if(ingreso =="NO"){
     document.write("Esperamos vuelva pronto")
 }
 
-function totalConImp(total){
-    return total*1.21
-}
 
-function mostrarAutos(autos){
-    autos.forEach(auto => {
-        console.log(auto)
-        
-        
-    });
-}
-
-function filtrarPrecio(auto){
-    if (datosBusqueda.precio){
-        return auto.precio === datosBusqueda.precio
-    }
-    return auto;
-}
-
-function filtrarMarca(auto){
-    if(datosBusqueda.marca){
-        return auto.marca === datosBusqueda.marca
-    }
-    return auto;
-}
-
-function filtrarModelo(auto){
-    if(datosBusqueda.modelo){
-        return auto.modelo === datosBusqueda.modelo
-    }
-    return auto;
-}
-
-function filtrarAño(auto){
-    if(datosBusqueda.año){
-        return auto.año === datosBusqueda.año
-    }
-    return auto;
-}
-
-
-function filtrarAuto(){
-    let resultado = autos.filter(filtrarMarca).filter(filtrarModelo).filter(filtrarAño);
-    if(resultado.length) {
-        mostrarAutos(resultado)
-    }
-} 
