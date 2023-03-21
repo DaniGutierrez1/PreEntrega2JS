@@ -1,113 +1,117 @@
+let valorVehiculo = 0
+let seguroContraTodo=0
+let totalSeguro=0
 let seguros=0
+let categoria=0
 let total=0
+
 
 const SERVICIO=12000
 
+//Que la funcion sea si es un auto o moto...si es moto no hay seguro
+
 let ingreso=prompt("Desea solicitar asesoria para su seguro?SI o NO?")
 
+//asdasd
+
+/* function categoria(valorVehiculo){
+    valorVehiculo*0.01
+}
+ */
 
 while (ingreso == "SI"){
     seguros+=1;
 
-    let marca = prompt("Marca de su vehiculo")
-    let año = prompt ("Año")
-    let precio = prompt("Precio estimado")
+    const lista = []
 
-    const auto = {
-        marca: marca,
-        año: año ,
-        precio: precio ,
-    }
+    do{
+        let auto ={};
+        let marca = prompt("Marca de su vehiculo")
+        auto.marca= marca
+        
+        let modelo = prompt ("Modelo")
+        auto.modelo = modelo
+        
+        let año = Number (prompt ("Año")) 
+        auto.año = año
 
-    const valor = auto.map( auto => auto.precio )
+        let precio = Number(prompt("Valor aproximado"))
+        auto.precio = precio
+        
+        lista.push(auto)
+    }while (lista.length != 1)
     
+    console.log(lista)
 
-    console.log(auto)
-    console.log (valor)
+    for (const auto of lista){
 
-    if (valor< 500000){
-        const CATEGORIA= categoria_1(valor)
-
-        let seguroTotal = prompt("Quisiera que su seguro sea contra todo riesgo? SI o NO?")
-
-        if (seguroTotal=="SI") {
-            const SEGUROCONTRATODO = seguroContraTodo(valor)
-            const TOTALSEGURO= totalSeguro (SEGUROCONTRATODO, CATEGORIA , SERVICIO) 
-            
-            total=TOTALSEGURO
-
-            console.log(total)
-
-        }else if (seguroTotal=="NO"){
-            const SEGUROCONTRATODO=0
-            const TOTALSEGURO= totalSeguro (SEGUROCONTRATODO, CATEGORIA , SERVICIO) 
-            
-            total=TOTALSEGURO
-
-            console.log(total)
-        }
-
-    }else if(auto.precio >500000){
-        const CATEGORIA=categoria_2(valor)
-        
-
-        let seguroTotal = prompt("Quisiera que su seguro sea contra todo riesgo? SI o NO?")
-        
-        if (seguroTotal=="SI") {
-            const SEGUROCONTRATODO = seguroContraTodo_2(valor)
-            const TOTALSEGURO= totalSeguro (SEGUROCONTRATODO, CATEGORIA , SERVICIO)
-
-            total=TOTALSEGURO
-
-            console.log(total)
-
-        }else if (seguroTotal=="NO"){
-            const SEGUROCONTRATODO=0
-            const TOTALSEGURO= totalSeguro (SEGUROCONTRATODO, CATEGORIA , SERVICIO) 
-            
-            total=TOTALSEGURO
-
-            console.log(total)
-        }
-
-    }else if(auto.precio>1000000){
-        const CATEGORIA=categoria_3(valor)
-        
-
-        let seguroTotal = prompt("Quisiera que su seguro sea contra todo riesgo? SI o NO?")
-        if (seguroTotal=="SI") {
-
-            const SEGUROCONTRATODO = seguroContraTodo_3(valor)
-            const TOTALSEGURO= totalSeguro (SEGUROCONTRATODO, CATEGORIA , SERVICIO) 
-
-            total=TOTALSEGURO
-
-            console.log(total)
-            
-        }else if (seguroTotal=="NO"){
-            const SEGUROCONTRATODO=0
-            const TOTALSEGURO= totalSeguro (SEGUROCONTRATODO, CATEGORIA , SERVICIO) 
-
-            
-            total=TOTALSEGURO
-
-            console.log(total)
-
-        }
-    }
     
-    const SEGURO=totalConImp(total)
-    console.log(SEGURO)
+        if (auto.precio < 500000){
+            categoria=auto.precio*0.01
+            let seguroTotal = prompt("Quisiera que su seguro sea contra todo riesgo? SI o NO?")
 
-    document.write("Este es su seguro numero " + seguros + "<br>")
-    document.write("Su auto "+ marca + " modelo " + modelo + " estara asegurado por " + SEGURO + " al mes." )
-    ingreso=prompt("Quiere volver a cotizar su seguro o cotizar algun auto mas? SI o NO?")
+            if (seguroTotal=="SI") {
+                seguroContraTodo=auto.precio*0.015
+                totalSeguro=seguroContraTodo + categoria + SERVICIO
+                console.log(totalSeguro)
+                total=totalSeguro
+            }else if (seguroTotal=="NO"){
+                seguroContraTodo=0
+                totalSeguro=seguroContraTodo + categoria + SERVICIO
+                console.log(totalSeguro)
+                total=totalSeguro
+            }
 
-    if(ingreso == "SI"){
-        console.log("Volveremos a calcular su seguro")
-        console.log("-------")
-        total = 0 ;
-    }
+        }else if(lista.precio >500000){
+            categoria=auto.precio*0.02
+            let seguroTotal = prompt("Quisiera que su seguro sea contra todo riesgo? SI o NO?")
+            
+            if (seguroTotal=="SI") {
+                seguroContraTodo=auto.precio *0.018
+                totalSeguro=seguroContraTodo + categoria + SERVICIO
+                console.log(totalSeguro)
+                total=totalSeguro
+                
+            }else if (seguroTotal=="NO"){
+                seguroContraTodo=0
+                totalSeguro=seguroContraTodo + categoria + SERVICIO
+                console.log(totalSeguro)
+                total=totalSeguro
+            }
+
+        }else if(lista.precio>1000000){
+            let seguroTotal = prompt("Quisiera que su seguro sea contra todo riesgo? SI o NO?")
+            categoria=datosBusqueda.precio*0.3
+
+            if (seguroTotal=="SI") {
+                seguroContraTodo=lista.precio*0.025
+                totalSeguro=seguroContraTodo + categoria + SERVICIO
+                console.log(totalSeguro)
+                total=totalSeguro
+            }else if (seguroTotal=="NO"){
+                seguroContraTodo=0
+                totalSeguro=seguroContraTodo + categoria + SERVICIO
+                console.log(totalSeguro)
+                total=totalSeguro
+
+            }
+        }
+        
+        function totalConImp(total){
+            return total*1.21
+        }
+        const SEGURO=totalConImp(total)
+        console.log(SEGURO)
+
+        document.write("El valor de su seguro numero " + seguros + " es de " + SEGURO + "<br>")
+        ingreso=prompt("Quiere volver a cotizar su seguro o cotizar algun auto mas? SI o NO?")
+
+        if(ingreso == "SI"){
+            console.log("Volveremos a calcular su seguro")
+            console.log("-------")
+            totalSeguro = 0 ;
+        }
+    }     
 }
 
 
@@ -115,33 +119,22 @@ if(ingreso =="NO"){
     document.write("Esperamos vuelva pronto")
 }
 
-function categoria_1(valor){
-    return valor*0.01
+/* function mostrarAutos(autos){
+    autos.forEach(auto => {
+        console.log(auto)
+        
+        
+    });
 }
 
-function categoria_2(valor){
-    return valor*0.012
+function filtrarPrecio(auto){
+    if (datosBusqueda.precio){
+        return auto.precio === datosBusqueda.precio
+    }
+    return auto;
 }
+ */
 
-function categoria_3(valor){
-    return valor*0.015
-}
-
-function seguroContraTodo(valor){
-    return valor*0.015
-}
-
-function seguroContraTodo_2(valor){
-    return valor*0.018
-}
-
-function seguroContraTodo_3(valor){
-    return valor*0.025
-}
-
-function totalSeguro(SEGUROCONTRATODO, CATEGORIA, SERVICIO){
-    return SEGUROCONTRATODO + CATEGORIA + SERVICIO
-}
-function totalConImp(total){
-    return total*1.21
-}
+/* function filtarAuto(){
+    let resultado = autos.filter(filtrarPrecio);
+} */
